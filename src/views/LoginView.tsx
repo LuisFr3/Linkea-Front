@@ -34,21 +34,23 @@ export default function LoginView() {
 
   return (
     <>
-      <h1 className='text-4xl text-white font-bold'>Iniciar Sesión</h1>
-
+  <div className="animate-fade-up w-full flex flex-col items-center justify-center p-4">    
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
+      className="bg-white px-6 py-8 rounded-xl shadow-lg space-y-6 w-full"
         noValidate
       >
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-semibold">Iniciar sesión</h1>
+        <p className="text-sm text-gray-400">Ingresa tu correo y contraseña</p>
+      </div>
         <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="email" className="text-2xl text-slate-500">E-mail</label>
         <div className="relative">
           <input
             id="email"
             type="email"
             placeholder="Email de Registro"
-            className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-400 w-full"
+      className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-400 w-full"
             {...register("email", {
               required: "El Email es obligatorio",
               pattern: {
@@ -65,7 +67,6 @@ export default function LoginView() {
         </div>
 
         <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="password" className="text-2xl text-slate-500">Password</label>
             <div className="relative">
 
           <input
@@ -96,18 +97,19 @@ export default function LoginView() {
 
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+          className="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-md text-sm font-semibold transition"
           value='Iniciar Sesión'
         />
       </form>
 
 
-      <nav className='mt-10'>
+      <nav className='mt-6'>
         <Link
           className='text-center text-white text-lg block'
           to="/auth/register"
         >¿No tienes cuenta? Crea una aquí</Link>
       </nav>
+       </div>
     </>
   )
 }

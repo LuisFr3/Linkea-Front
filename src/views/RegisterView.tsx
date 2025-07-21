@@ -8,6 +8,8 @@ import api from '../config/axios'
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoMailOutline } from "react-icons/io5"
+import { FaUser, FaAt } from 'react-icons/fa'
+
 
 export default function RegisterView() {
     const location = useLocation()
@@ -44,33 +46,36 @@ export default function RegisterView() {
 
     return (
         <>
-            <h1 className='text-4xl text-white font-bold'>Crear Cuenta</h1>
-
+  <div className="animate-fade-up w-full flex flex-col items-center justify-center p-4">    
             <form
                 onSubmit={handleSubmit(handleRegister)}
-                className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
+                className="bg-white px-6 py-8 rounded-xl shadow-lg space-y-6 w-full"
             >
+                <div className="text-center space-y-2">
+                    <h1 className="text-3xl font-semibold">Crear cuenta</h1>
+                </div>
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="name" className="text-2xl text-slate-500">Nombre</label>
+                      <div className="relative">
                     <input
                         id="name"
                         type="text"
-                        placeholder="Tu Nombre"
-                        className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        placeholder="Ingresa tu nombre"
+                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-600 w-full"
                         {...register('name', {
                             required: "El nombre es obligatorio"
                         })}
                     />
+                        <FaUser className="absolute right-3 top-3 w-5 h-5 text-slate-500" />
+                    </div>                    
                     {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="email" className="text-2xl text-slate-500">E-mail</label>
                 <div className="relative">
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email de Registro"
-                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-400 w-full"
+                        placeholder="Correo electrónico"
+                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-600 w-full"
                         {...register('email', {
                             required: "El Email es obligatorio", 
                             pattern: {
@@ -84,26 +89,27 @@ export default function RegisterView() {
                     {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="handle" className="text-2xl text-slate-500">Handle</label>
+                      <div className="relative">
                     <input
                         id="handle"
                         type="text"
-                        placeholder="Nombre de usuario: sin espacios"
-                        className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        placeholder="Ingresa tu nombre de usuario (sin espacios)"
+                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-600 w-full"
                         {...register('handle', {
                             required: "El Handle es obligatorio"
                         })}
                     />
+                        <FaAt className="absolute right-3 top-3 w-5 h-5 text-slate-500" />
+                    </div>                    
                     {errors.handle && <ErrorMessage>{errors.handle.message}</ErrorMessage>}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="password" className="text-2xl text-slate-500">Password</label>
                 <div className="relative">
                     <input
                         id="password"
                         type={mostrarPassword ? 'text' : 'password'}
-                        placeholder="Password de Registro"
-                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-400 w-full"
+                        placeholder="Ingresa tu contraseña"
+                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-600 w-full"
                         {...register('password', {
                             required: "El Password es obligatorio",
                             minLength: {
@@ -128,13 +134,12 @@ export default function RegisterView() {
                 </div>
 
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="password_confirmation" className="text-2xl text-slate-500">Repetir Password</label>
                 <div className="relative">
                     <input
                         id="password_confirmation"
                         type={mostrarPassword ? 'text' : 'password'}
-                        placeholder="Repetir Password"
-                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-400 w-full"
+                        placeholder="Repetir contraseña"
+                        className="bg-slate-100 border-none p-3 pr-10 rounded-lg placeholder-slate-600 w-full"
                         {...register('password_confirmation', {
                             required: "Repetir Password es obligatorio",
                             validate: (value) => value === password || 'Los passwords no son iguales'
@@ -157,17 +162,18 @@ export default function RegisterView() {
 
                 <input
                     type="submit"
-                    className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+                    className="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-md text-sm font-semibold transition"
                     value='Crear Cuenta'
                 />
             </form>
 
-            <nav className='mt-10'>
+            <nav className='mt-6'>
                 <Link
                     className='text-center text-white text-lg block'
                     to="/auth/login"
                 >¿Ya tienes una cuenta? Inicia Sesión</Link>
             </nav>
+           </div>
         </>
     )
 }
