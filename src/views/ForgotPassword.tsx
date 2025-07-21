@@ -116,7 +116,7 @@ export default function ForgotPasswordView() {
           disabled={mutation.isPending}
           className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white w-full py-3 rounded-lg text-sm font-semibold transition-colors"
         >
-          {mutation.isPending ? "Enviando..." : "Enviar link"}
+          {mutation.isPending ? "Enviando..." : "Enviar Correo"}
         </button>
       </form>
 
