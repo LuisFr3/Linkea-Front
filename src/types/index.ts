@@ -24,3 +24,12 @@ export type SocialNetwork = {
     enabled: boolean
 }
 export type DevTreeLink = Pick<SocialNetwork, 'name' | 'url' | 'enabled'>
+
+export type ForgotPasswordForm = {
+  email: string
+}
+
+export type ResetPasswordForm = {
+  password: string
+  password_confirmation: string
+}

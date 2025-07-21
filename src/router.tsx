@@ -8,6 +8,9 @@ import ProfileView from './views/ProfileView'
 import HandleView from './views/HandleView'
 import NotFoundView from './views/NotFoundView'
 import HomeView from './views/HomeView'
+import ForgotPasswordView from "../src/views/ForgotPassword"
+import ResetPasswordView from "../src/views/ResetPassword"
+
 
 export default function Router() {
 
@@ -17,6 +20,8 @@ export default function Router() {
                 <Route element={<AuthLayout />}>
                     <Route path='/auth/login' element={<LoginView />} />
                     <Route path='/auth/register' element={<RegisterView />} />
+                    <Route path="/auth/forgot-password" element={<ForgotPasswordView />} />
+                    <Route path="/auth/reset-password/:token" element={<ResetPasswordView />} />
                 </Route>
                 <Route path='/admin' element={<AppLayout />}>
                     <Route index={true} element={<LinkTreeView />} />

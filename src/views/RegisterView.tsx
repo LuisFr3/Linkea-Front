@@ -168,10 +168,12 @@ export default function RegisterView() {
             </form>
 
             <nav className='mt-6'>
-                <Link
-                    className='text-center text-white text-lg block'
-                    to="/auth/login"
-                >¿Ya tienes una cuenta? Inicia Sesión</Link>
+                <div>
+                <span className="text-white">¿Ya tienes una cuenta? </span>
+                <Link className="text-lime-300 hover:text-lime-200 font-medium" to="/auth/login">
+                    Inicia Sesión
+                </Link>
+                </div>                
             </nav>
            </div>
         </>

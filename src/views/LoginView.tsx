@@ -21,23 +21,30 @@ export default function LoginView() {
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
   const [mostrarPassword, setMostrarPassword] = useState(false)
   const verContraseña = () => setMostrarPassword(!mostrarPassword)
-const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleLogin = async (formData: LoginForm) => {
+  setIsLoading(true);
     try {
       const { data } = await api.post(`/auth/login`, formData)
-     console.log('Respuesta del login:', data)     
       localStorage.setItem('AUTH_TOKEN', data)
 
-    await queryClient.invalidateQueries({ queryKey: ['user'] }); // Forzar a que se actualice el usuario al iniciar sesión para no tener que loguearme 2 veces para acceder al admin
-    
-      navigate('/admin')
+    // Redirige directamente
+    navigate('/admin');
+
+    // Luego actualizas el usuario (sin esperar)
+    queryClient.invalidateQueries({ queryKey: ['user'] });
+
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-        toast.error(error.response.data.error)
+        toast.error(error.response.data.error);
       }
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -102,21 +109,32 @@ const queryClient = useQueryClient();
           )}
         </div>
 
-        <input
-          type="submit"
-          className="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-md text-sm font-semibold transition"
-          value='Iniciar Sesión'
-        />
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white w-full py-2 rounded-md text-sm font-semibold transition"
+      >
+        {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+      </button>
+
+        
+          <div className="text-center">
+            <Link to="/auth/forgot-password" className="text-sm text-green-600 hover:text-green-700 font-medium">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </div>        
       </form>
 
 
       <nav className='mt-6'>
-        <Link
-          className='text-center text-white text-lg block'
-          to="/auth/register"
-        >¿No tienes cuenta? Crea una aquí</Link>
+        <div>
+          <span className="text-white">¿No tienes cuenta? </span>
+          <Link className="text-lime-300 hover:text-lime-200 font-medium" to="/auth/register">
+            Regístrate aquí
+          </Link>
+        </div>
       </nav>
-       </div>
+      </div>
     </>
   )
 }
