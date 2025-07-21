@@ -31,10 +31,7 @@ export default function LoginView() {
       const { data } = await api.post(`/auth/login`, formData)
       localStorage.setItem('AUTH_TOKEN', data)
 
-    // Redirige directamente
     navigate('/admin');
-
-    // Luego actualizas el usuario (sin esperar)
     queryClient.invalidateQueries({ queryKey: ['user'] });
 
     } catch (error) {
