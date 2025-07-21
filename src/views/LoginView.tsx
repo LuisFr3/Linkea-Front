@@ -8,6 +8,8 @@ import api from '../config/axios'
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoMailOutline } from "react-icons/io5"
+import { useQueryClient } from '@tanstack/react-query';
+
 
 export default function LoginView() {
   const navigate = useNavigate()
@@ -19,11 +21,16 @@ export default function LoginView() {
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
   const [mostrarPassword, setMostrarPassword] = useState(false)
   const verContraseña = () => setMostrarPassword(!mostrarPassword)
+const queryClient = useQueryClient();
 
   const handleLogin = async (formData: LoginForm) => {
     try {
       const { data } = await api.post(`/auth/login`, formData)
+     console.log('Respuesta del login:', data)     
       localStorage.setItem('AUTH_TOKEN', data)
+
+    await queryClient.invalidateQueries({ queryKey: ['user'] }); // Forzar a que se actualice el usuario al iniciar sesión para no tener que loguearme 2 veces para acceder al admin
+
       navigate('/admin')
     } catch (error) {
       if (isAxiosError(error) && error.response) {

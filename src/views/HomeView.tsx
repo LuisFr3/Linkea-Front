@@ -13,7 +13,7 @@ export default function HomeView() {
                         Todas tus <span className="text-cyan-400">Redes Sociales </span>
                         en un enlace
                     </h1>
-            <TextoAnimado/>
+                    <TextoAnimado/>
                     <SearchForm />
                 </div>
             </div>
