@@ -30,7 +30,7 @@ const queryClient = useQueryClient();
       localStorage.setItem('AUTH_TOKEN', data)
 
     await queryClient.invalidateQueries({ queryKey: ['user'] }); // Forzar a que se actualice el usuario al iniciar sesión para no tener que loguearme 2 veces para acceder al admin
-
+    
       navigate('/admin')
     } catch (error) {
       if (isAxiosError(error) && error.response) {
