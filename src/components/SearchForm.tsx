@@ -58,7 +58,7 @@ export default function SearchForm() {
 
             <input
                 type="submit"
-                className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+  className="bg-cyan-500 hover:bg-cyan-600 transition text-white text-lg w-full py-3 rounded-lg font-semibold cursor-pointer shadow-md"
                 value='Obtener mi DevTree'
             />
         </form>
